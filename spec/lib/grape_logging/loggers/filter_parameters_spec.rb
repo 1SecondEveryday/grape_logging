@@ -34,7 +34,7 @@ describe GrapeLogging::Loggers::FilterParameters do
 
   shared_examples 'filtering' do
     it 'filters out sensitive parameters' do
-      expect(subject.parameters(mock_request, nil)).to eq(params: {
+      expect(subject.parameters(mock_request, 200, nil)).to eq(params: {
         this_one: subject.instance_variable_get('@replacement'),
         that_one: subject.instance_variable_get('@replacement'),
         two: 'two',
@@ -44,7 +44,7 @@ describe GrapeLogging::Loggers::FilterParameters do
     end
 
     it 'deeply filters out sensitive parameters' do
-      expect(subject.parameters(mock_request_with_deep_nesting, nil)).to eq(params: {
+      expect(subject.parameters(mock_request_with_deep_nesting, 200, nil)).to eq(params: {
         this_one: subject.instance_variable_get('@replacement'),
         that_one: subject.instance_variable_get('@replacement'),
         two: 'two',
