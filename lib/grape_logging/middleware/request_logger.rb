@@ -97,6 +97,7 @@ module GrapeLogging
             db: db_runtime,
             view: view_runtime
           },
+          request_id: env['action_dispatch.request_id'],
           method: request.request_method,
           path: request.path,
           params: request.params,
