@@ -1,6 +1,5 @@
 # grape_logging
 
-[![Code Climate](https://codeclimate.com/github/1SecondEveryday/grape_logging/badges/gpa.svg)](https://codeclimate.com/github/1SecondEveryday/grape_logging)
 [![Build Status](https://github.com/1SecondEveryday/grape_logging/actions/workflows/ci.yml/badge.svg)](https://github.com/1SecondEveryday/grape_logging/actions/workflows/ci.yml)
 
 ## Installation
