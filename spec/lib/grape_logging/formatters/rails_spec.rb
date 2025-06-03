@@ -62,7 +62,13 @@ describe GrapeLogging::Formatters::Rails do
         message = formatter.call(severity, datetime, nil, hash_data)
         lines = message.split("\n")
 
-        expect(lines.first).to eq '  Parameters: {"some_param" => {value_1: "123", value_2: "456"}}'
+        expect(lines.first).to eq(
+          if RUBY_VERSION.start_with?('3.4')
+            '  Parameters: {"some_param" => {value_1: "123", value_2: "456"}}'
+          else
+            '  Parameters: {"some_param"=>{:value_1=>"123", :value_2=>"456"}}'
+          end
+        )
         expect(lines.last).to eq 'Completed 200 OK in 272.4ms (Views: 231.77ms | DB: 40.63ms)'
       end
     end
