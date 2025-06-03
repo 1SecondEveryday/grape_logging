@@ -1,9 +1,12 @@
 # grape_logging
 
-[![Code Climate](https://codeclimate.com/github/aserafin/grape_logging/badges/gpa.svg)](https://codeclimate.com/github/aserafin/grape_logging)
-[![Build Status](https://travis-ci.org/aserafin/grape_logging.svg?branch=master)](https://travis-ci.org/aserafin/grape_logging)
+[![Code Climate](https://codeclimate.com/github/1SecondEveryday/grape_logging/badges/gpa.svg)](https://codeclimate.com/github/1SecondEveryday/grape_logging)
+[![Build Status](https://github.com/1SecondEveryday/grape_logging/actions/workflows/ci.yml/badge.svg)](https://github.com/1SecondEveryday/grape_logging/actions/workflows/ci.yml)
 
 ## Installation
+
+> [!WARNING]
+> This is a fork of the original which is no longer maintained, and can only be installed via GitHub at the moment.
 
 Add this line to your application's Gemfile:
 
@@ -19,7 +22,7 @@ Or install it yourself as:
 
 ## Basic Usage
 
-In your api file (somewhere on the top), insert grape logging middleware before grape error middleware. This is important due to the behaviour of `lib/grape/middleware/error.rb`, which manipulates the status of the response when there is an error. 
+In your api file (somewhere on the top), insert grape logging middleware before grape error middleware. This is important due to the behaviour of `lib/grape/middleware/error.rb`, which manipulates the status of the response when there is an error.
 
 ```ruby
 require 'grape_logging'
@@ -208,7 +211,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/aserafin/grape_logging/fork )
+1. Fork it ( https://github.com/1SecondEveryday/grape_logging/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
