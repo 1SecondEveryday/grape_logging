@@ -6,18 +6,24 @@ module GrapeLogging
       end
 
       def format(data)
-        if data.is_a?(String)
+        case data
+        when String
           data
-        elsif data.is_a?(Exception)
+        when Exception
           format_exception(data)
-        elsif data.is_a?(Hash)
-          "#{data.delete(:status)} -- #{format_hash(data.delete(:time))} -- #{data.delete(:method)} #{data.delete(:path)} #{format_hash(data)}"
+        when Hash
+          [
+            data.delete(:status),
+            format_hash(data.delete(:time)),
+            "#{data.delete(:method)} #{data.delete(:path)} #{format_hash(data)}"
+          ].join(' -- ')
         else
           data.inspect
         end
       end
 
       private
+
       def format_hash(hash)
         hash.keys.sort.map { |key| "#{key}=#{hash[key]}" }.join(' ')
       end

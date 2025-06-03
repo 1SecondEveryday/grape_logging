@@ -1,3 +1,5 @@
+
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'grape_logging/version'
@@ -28,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.13'
   spec.add_development_dependency 'rubocop', '~> 1.75'
   spec.add_development_dependency 'rubocop-rspec', '~> 3.6'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

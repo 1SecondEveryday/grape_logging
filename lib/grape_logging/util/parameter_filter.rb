@@ -1,4 +1,4 @@
-if defined?(::Rails.application)
+if defined?(Rails.application)
   if Gem::Version.new(Rails.version) < Gem::Version.new('6.0.0')
     class ParameterFilter < ActionDispatch::Http::ParameterFilter
       def initialize(_replacement, filter_parameters)
@@ -6,7 +6,7 @@ if defined?(::Rails.application)
       end
     end
   else
-    require "active_support/parameter_filter"
+    require 'active_support/parameter_filter'
 
     class ParameterFilter < ActiveSupport::ParameterFilter
       def initialize(_replacement, filter_parameters)
@@ -37,9 +37,11 @@ else
 
     class CompiledFilter # :nodoc:
       def self.compile(replacement, filters)
-        return lambda { |params| params.dup } if filters.empty?
+        return lamda(&:dup) if filters.empty?
 
-        strings, regexps, blocks = [], [], []
+        strings = []
+        regexps = []
+        blocks = []
 
         filters.each do |item|
           case item
@@ -52,11 +54,11 @@ else
           end
         end
 
-        deep_regexps, regexps = regexps.partition { |r| r.to_s.include?("\\.".freeze) }
-        deep_strings, strings = strings.partition { |s| s.include?("\\.".freeze) }
+        deep_regexps, regexps = regexps.partition { |r| r.to_s.include?('\\.') }
+        deep_strings, strings = strings.partition { |s| s.include?('\\.') }
 
-        regexps << Regexp.new(strings.join('|'.freeze), true) unless strings.empty?
-        deep_regexps << Regexp.new(deep_strings.join('|'.freeze), true) unless deep_strings.empty?
+        regexps << Regexp.new(strings.join('|'), true) unless strings.empty?
+        deep_regexps << Regexp.new(deep_strings.join('|'), true) unless deep_strings.empty?
 
         new replacement, regexps, deep_regexps, blocks
       end
@@ -67,7 +69,7 @@ else
         @replacement = replacement
         @regexps = regexps
         @deep_regexps = deep_regexps.any? ? deep_regexps : nil
-        @blocks  = blocks
+        @blocks = blocks
       end
 
       def call(original_params, parents = [])
@@ -77,7 +79,9 @@ else
           parents.push(key) if deep_regexps
           if regexps.any? { |r| key =~ r }
             value = @replacement
-          elsif deep_regexps && (joined = parents.join('.')) && deep_regexps.any? { |r| joined =~ r }
+          elsif deep_regexps && (joined = parents.join('.')) && deep_regexps.any? do |r|
+            joined =~ r
+          end
             value = @replacement
           elsif value.is_a?(Hash)
             value = call(value, parents)
