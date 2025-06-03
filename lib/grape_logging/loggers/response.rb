@@ -15,12 +15,11 @@ module GrapeLogging
       # For example, if you POST on a PUT endpoint, response.body is equal to """".
       # It's strange but it's the Grape behavior...
       def parsed_response_body(response)
-
         if response.respond_to?(:body)
           # Rack responses
           begin
             response.body.map { |body| JSON.parse(body.to_s) }
-          rescue
+          rescue StandardError
             response.body
           end
         else

@@ -3,20 +3,21 @@ module GrapeLogging
     class Logstash
       def call(severity, datetime, _, data)
         {
-          :'@timestamp' => datetime.iso8601,
-          :'@version' => '1',
-          :severity => severity
+          '@timestamp': datetime.iso8601,
+          '@version': '1',
+          severity: severity
         }.merge!(format(data)).to_json + "\n"
       end
 
       private
 
       def format(data)
-        if data.is_a?(Hash)
+        case data
+        when Hash
           data
-        elsif data.is_a?(String)
+        when String
           { message: data }
-        elsif data.is_a?(Exception)
+        when Exception
           format_exception(data)
         else
           { message: data.inspect }

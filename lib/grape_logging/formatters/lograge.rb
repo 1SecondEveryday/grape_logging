@@ -10,7 +10,7 @@ module GrapeLogging
           view: time[:view],
           datetime: datetime.iso8601
         }.merge(data)
-        ::Lograge.formatter.call(attributes) + "\n"
+        "#{::Lograge.formatter.call(attributes)}\n"
       end
     end
   end
