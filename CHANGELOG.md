@@ -2,11 +2,11 @@
 
 ## [3.0.1] - Unreleased
 
-### Changed or Fixed or Added
-
 ### Changed
-- Move dev dependencies to Gemfile
-- Use zeitwerk to load gem
+- [#96](https://github.com/aserafin/grape_logging/pull/96) Move dev dependencies to Gemfile and use zeitwerk to load files - [@n-rodriguez](https://github.com/n-rodriguez).
+
+### Changed or Fixed or Added
+- Your contribution here.
 
 [3.0.1]: https://github.com/aserafin/grape_logging/compare/v3.0.0...master
 
